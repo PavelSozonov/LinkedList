@@ -32,7 +32,7 @@ public class LinkedList<T> implements Iterable<T> {
     // Add by index
     // (if index == 0 it's new head, if index == size it's new tail)
     public void add(T value, int index) {
-        if ((index > size) || index < 0) throw new IllegalArgumentException();
+        if ((index > size) || index < 0) throw new IllegalArgumentException("The index out of boundaries");
 
         if (index == size) {
             add(value);
@@ -57,7 +57,7 @@ public class LinkedList<T> implements Iterable<T> {
 
     // Find node by index
     private Node<T> find(int index) {
-        if ((index > size - 1) || (index < 0)) throw new IllegalArgumentException();
+        if ((index > size - 1) || (index < 0)) throw new IllegalArgumentException("Index out of boundaries");
         int currentIndex;
         Node<T> currentNode;
         if (index < (size - 1) / 2) { // Search from head
@@ -88,9 +88,9 @@ public class LinkedList<T> implements Iterable<T> {
         return currentNode;
     }
 
-    // Remove node, it must exist
+    // Remove node, it must exist, and it must be the node of this list
     private void remove(Node<T> removeNode) {
-        if (removeNode == null) throw new IllegalArgumentException();
+        if (removeNode == null) throw new IllegalArgumentException("The argument equals null");
         Node<T> prev = removeNode.getPrev();
         Node<T> next = removeNode.getNext();
         if (prev != null) prev.setNext(next);
@@ -107,7 +107,7 @@ public class LinkedList<T> implements Iterable<T> {
     // Remove by value
     public void remove(T value) {
         Node<T> removeNode = find(value);
-        if (removeNode == null) throw new IllegalArgumentException();
+        if (removeNode == null) throw new IllegalArgumentException("The value does not exist");
         remove(removeNode);
     }
 

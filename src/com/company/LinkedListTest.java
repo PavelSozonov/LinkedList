@@ -34,24 +34,44 @@ public class LinkedListTest {
         assertEquals(3, testList.size());
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void argumentTest1() {
-        testList.add(1, -1);
+        try {
+            testList.add(1, -11);
+            fail();
+        } catch (IllegalArgumentException expected) {
+            assertEquals("The index out of boundaries", expected.getMessage());
+        }
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void argumentTest2() {
-        testList.add(1, 1);
+        try {
+            testList.add(1, 1);
+            fail();
+        } catch (IllegalArgumentException expected) {
+            assertEquals("The index out of boundaries", expected.getMessage());
+        }
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void argumentTest3() {
-        testList.remove(null);
+        try {
+            testList.remove(null);
+            fail();
+        } catch (IllegalArgumentException expected) {
+            assertEquals("The value does not exist", expected.getMessage());
+        }
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void argumentTest4() {
-        testList.remove(new Integer(5));
+        try {
+            testList.remove(new Integer(5));
+            fail();
+        } catch (IllegalArgumentException expected) {
+            assertEquals("The value does not exist", expected.getMessage());
+        }
     }
 
     @Test
