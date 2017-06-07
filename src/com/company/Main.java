@@ -6,9 +6,12 @@ public class Main {
         LinkedList<Long> list = new LinkedList<>();
         list.add(5L);
         list.add(10L);
+        list.add(1L, 1);
         list.add(9L);
-        //list.remove(0);
-        //list.remove(1);
+        list.add(100L, 0);
+        list.remove(0);
+        list.remove(3);
+        list.remove(2);
         System.out.println(String.format("Contains: %d, %s", 5, list.contains(5L)));
         System.out.println(String.format("Contains: %d, %s", 10, list.contains(10L)));
         System.out.println(String.format("Contains: %d, %s", 9, list.contains(9L)));

@@ -29,18 +29,27 @@ public class LinkedList<T> implements Iterable<T> {
     }
 
     public void add(T value, int index) {
-        if (index > size - 1) throw new IllegalArgumentException();
-        Node<T> newNode = new Node<>(value);
+        if ((index > size) || index < 0) throw new IllegalArgumentException();
 
-        Node<T> insertAfterNode = find(index);
+        if (index == size) {
+            add(value);
+        } else {
+            Node<T> newNode = new Node<>(value);
 
-        Node<T> next = insertAfterNode.getNext();
-        insertAfterNode.setNext(newNode);
-        newNode.setPrev(insertAfterNode);
-        newNode.setNext(next);
-        next.setPrev(newNode);
+            Node<T> insertBeforeThisNode = find(index);
+            newNode.setNext(insertBeforeThisNode);
 
-        size++;
+            Node<T> prev = insertBeforeThisNode.getPrev();
+
+            if (prev == null) {
+                head = newNode;
+            } else {
+                prev.setNext(newNode);
+                newNode.setPrev(prev);
+            }
+            insertBeforeThisNode.setPrev(newNode);
+            size++;
+        }
     }
 
     private Node<T> find(int index) {
@@ -79,6 +88,12 @@ public class LinkedList<T> implements Iterable<T> {
         Node<T> next = removeNode.getNext();
         if (prev != null) prev.setNext(next);
         if (next != null) next.setPrev(prev);
+        if (removeNode.equals(head)) {
+            head = removeNode.getNext();
+        }
+        if (removeNode.equals(tail)) {
+            tail = removeNode.getPrev();
+        }
         size--;
     }
 
