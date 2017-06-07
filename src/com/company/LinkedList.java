@@ -15,6 +15,7 @@ public class LinkedList<T> implements Iterable<T> {
         return size;
     }
 
+    // Add in the end
     public void add(T value) {
         Node<T> newNode = new Node<>(value);
         if (head == null) {
@@ -28,6 +29,8 @@ public class LinkedList<T> implements Iterable<T> {
         size++;
     }
 
+    // Add by index
+    // (if index == 0 it's new head, if index == size it's new tail)
     public void add(T value, int index) {
         if ((index > size) || index < 0) throw new IllegalArgumentException();
 
@@ -52,6 +55,7 @@ public class LinkedList<T> implements Iterable<T> {
         }
     }
 
+    // Find node by index
     private Node<T> find(int index) {
         if ((index > size - 1) || (index < 0)) throw new IllegalArgumentException();
         int currentIndex;
@@ -74,14 +78,17 @@ public class LinkedList<T> implements Iterable<T> {
         return currentNode;
     }
 
+    // Find node by value
     private Node<T> find(T value) {
         Node<T> currentNode = head;
         while (currentNode != null && currentNode.getValue() != value) {
             currentNode = currentNode.getNext();
         }
+        if (currentNode == null || currentNode.getValue() != value) return null;
         return currentNode;
     }
 
+    // Remove node, it must exist
     private void remove(Node<T> removeNode) {
         if (removeNode == null) throw new IllegalArgumentException();
         Node<T> prev = removeNode.getPrev();
@@ -97,16 +104,20 @@ public class LinkedList<T> implements Iterable<T> {
         size--;
     }
 
+    // Remove by value
     public void remove(T value) {
         Node<T> removeNode = find(value);
+        if (removeNode == null) throw new IllegalArgumentException();
         remove(removeNode);
     }
 
+    // Remove by index
     public void remove(int index) {
         Node<T> removeNode = find(index);
         remove(removeNode);
     }
 
+    // Check if list contains value
     public boolean contains(T value) {
         Node<T> searchedNode = find(value);
         if (searchedNode != null) return true;
